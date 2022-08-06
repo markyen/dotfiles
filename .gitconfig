@@ -1,0 +1,11 @@
+[user]
+    name = Mark Yen
+    email = mark@sisudata.com
+[alias]
+    ci = commit
+    co = checkout
+    di = diff
+    st = status
+    br = branch
+[help]
+    autocorrect = 5
