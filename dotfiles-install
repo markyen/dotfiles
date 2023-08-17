@@ -1,4 +1,8 @@
-# https://www.atlassian.com/git/tutorials/dotfiles
+# ## Installation
+# ```curl https://raw.githubusercontent.com/markyen/dotfiles/main/dotfiles-install | /bin/bash```
+# ## References
+# * https://www.atlassian.com/git/tutorials/dotfiles
+
 git clone --bare git@github.com:markyen/dotfiles $HOME/.dotfiles
 function config {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
