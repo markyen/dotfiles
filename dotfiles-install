@@ -3,17 +3,17 @@
 # ## References
 # * https://www.atlassian.com/git/tutorials/dotfiles
 
-git clone --bare git@github.com:markyen/dotfiles $HOME/.dotfiles
+git clone --bare git@github.com:markyen/dotfiles "$HOME/.dotfiles"
 function dotfiles {
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+  /usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
 }
-mkdir -p $HOME/.dotfiles-backup
+mkdir -p "$HOME/.dotfiles-backup"
 dotfiles checkout
 if [ $? = 0 ]; then
   echo "Checked out dotfiles."
 else
   echo "Backing up pre-existing dotfiles to ~/.dotfiles-backup."
-  dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv $HOME/{} $HOME/.dotfiles-backup/{}
+  dotfiles checkout 2>&1 | awk '$1 ~ /^\./ {print $1}' | xargs -I{} sh -c 'mkdir -p "$HOME/.dotfiles-backup/$(dirname "$1")" && mv "$HOME/$1" "$HOME/.dotfiles-backup/$1"' _ {}
 fi
 dotfiles checkout
 dotfiles config status.showUntrackedFiles no
